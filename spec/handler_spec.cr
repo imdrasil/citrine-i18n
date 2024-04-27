@@ -6,7 +6,6 @@ I18n.load_path += ["./spec/fixtures/"]
 I18n.init
 
 describe Citrine::I18n::Handler do
-
   it "should set language from header" do
     request = HTTP::Request.new("GET", "/")
     request.headers["Accept-Language"] = "fr,en-US;q=0.7,en;q=0.3"
@@ -24,5 +23,4 @@ describe Citrine::I18n::Handler do
     handler.call(context)
     context.locale.should eq "en"
   end
-
 end

@@ -6,4 +6,3 @@ def create_context(request)
   response = HTTP::Server::Response.new(io)
   HTTP::Server::Context.new(request, response)
 end
-

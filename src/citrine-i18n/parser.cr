@@ -1,5 +1,4 @@
 module Citrine::I18n
-
   # Taken from https://github.com/iain/http_accept_language/blob/master/lib/http_accept_language/parser.rb
   # Taken from https://github.com/TechMagister/kemalyst-i18n/src/kemalyst-i18n/parser.cr
   class Parser
@@ -27,8 +26,8 @@ module Citrine::I18n
           locale, quality = splited[0], splited[1]?
           raise ArgumentError.new "Not correctly formatted" unless locale =~ /^[a-z\-0-9]+|\*$/i
 
-          locale  = locale.downcase.gsub(/-[a-z0-9]+$/i, &.upcase) # Uppercase territory
-          locale  = nil if locale == "*" # Ignore wildcards
+          locale = locale.downcase.gsub(/-[a-z0-9]+$/i, &.upcase) # Uppercase territory
+          locale = nil if locale == "*"                           # Ignore wildcards
 
           quality = quality ? quality.to_f : 1.0
 
@@ -66,7 +65,7 @@ module Citrine::I18n
     #   request.compatible_language_from I18n.available_locales
     #
     def compatible_language_from(available_languages)
-      user_preferred_languages.map do |preferred| #en-US
+      user_preferred_languages.map do |preferred| # en-US
         preferred = preferred.downcase
         preferred_language = preferred.split("-", 2).first
 
@@ -100,7 +99,7 @@ module Citrine::I18n
     #
     def language_region_compatible_from(available_languages)
       available_languages = sanitize_available_locales(available_languages)
-      user_preferred_languages.map do |preferred| #en-US
+      user_preferred_languages.map do |preferred| # en-US
         preferred = preferred.downcase
         preferred_language = preferred.split("-", 2).first
 
@@ -108,9 +107,8 @@ module Citrine::I18n
           preferred_language == available.downcase.split("-", 2).first
         end
 
-        lang_group.find { |lang| lang.downcase == preferred } || lang_group.first #en-US, en-UK
+        lang_group.find { |lang| lang.downcase == preferred } || lang_group.first # en-US, en-UK
       end.compact.first
     end
   end
 end
-
